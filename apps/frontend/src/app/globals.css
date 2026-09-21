@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+
+  /* Primary — hijau tua */
+  --color-primary-50:  #EDF5F0;
+  --color-primary-100: #D3E7DC;
+  --color-primary-200: #A8D0B9;
+  --color-primary-500: #2F7F5C;
+  --color-primary-600: #1E6146;
+  --color-primary-700: #164A35;
+  --color-primary-900: #0A2419;
+
+  /* Accent — emas tua (lebih terang) */
+  --color-accent-50:  #FBF3E3;
+  --color-accent-300: #E0B85A;
+  --color-accent-400: #CF9B35;
+  --color-accent-600: #8A6520;
+
+  /* Neutral — abu hangat */
+  --color-neutral-0:   #FFFFFF;
+  --color-neutral-25:  #FAF8F4;
+  --color-neutral-100: #F0EDE6;
+  --color-neutral-200: #E1DCD1;
+  --color-neutral-300: #CFC8B9;
+  --color-neutral-400: #A69D89;
+  --color-neutral-450: #8F8672;
+  --color-neutral-500: #766E5D;
+  --color-neutral-600: #635C4C;
+  --color-neutral-900: #1E1A14;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-inter);
+    background-color: var(--color-neutral-25);
+    color: var(--color-neutral-900);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply text-neutral-900 bg-neutral-25;
+  }
+
+  /* Scrollbar tipis */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-neutral-100);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-300);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neutral-400);
+  }
+}
+
+@layer components {
+  /* Tombol utama */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium text-white
+      bg-primary-600 hover:bg-primary-700 active:bg-primary-700
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2
+      transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Tombol outline */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium
+      border border-neutral-300 text-neutral-600 bg-white hover:bg-neutral-100
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2
+      transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Tombol ghost */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded px-3 py-2 text-sm font-medium
+      text-neutral-600 hover:bg-neutral-100
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2
+      transition-colors duration-150;
+  }
+
+  /* Input */
+  .input-field {
+    @apply block w-full rounded border border-neutral-450 bg-white px-3 py-2 text-sm text-neutral-900
+      placeholder:text-neutral-500
+      focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600
+      disabled:bg-neutral-100 disabled:cursor-not-allowed
+      transition-shadow duration-150;
+  }
+
+  /* Label form */
+  .form-label {
+    @apply block text-sm font-medium text-neutral-900 mb-1;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white rounded-lg border border-neutral-200 shadow-card;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-neutral-200;
+  }
+
+  /* Teks sekunder */
+  .text-muted {
+    @apply text-sm text-neutral-600;
+  }
+}

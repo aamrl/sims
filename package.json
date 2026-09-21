@@ -1,0 +1,10 @@
+{
+  "name": "sims-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix apps/frontend run dev",
+    "build": "npm --prefix apps/frontend run build",
+    "install:all": "npm --prefix apps/frontend install"
+  }
+}
