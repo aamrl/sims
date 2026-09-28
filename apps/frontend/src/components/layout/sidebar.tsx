@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -116,22 +117,29 @@ function NavEntry({
 }) {
   const active = isActive(item.href);
   const Icon = item.icon;
+  const [isOpen, setIsOpen] = React.useState(active);
+
+  // Keep expanded if active path changes to this section
+  React.useEffect(() => {
+    if (active) setIsOpen(true);
+  }, [active]);
 
   if (item.children) {
-    const open = active;
     return (
       <div>
-        <div
+        <button
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
           className={cn(
-            "flex items-center gap-2.5 rounded px-3 py-2 text-sm cursor-default select-none",
-            open ? "bg-primary-600/60 text-white" : "text-primary-100",
+            "w-full flex items-center gap-2.5 rounded px-3 py-2 text-sm cursor-pointer select-none transition-colors",
+            isOpen || active ? "bg-primary-600/60 text-white font-medium" : "text-primary-100 hover:bg-primary-600/40 hover:text-white",
           )}
         >
           <Icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
-          <span className="flex-1">{item.label}</span>
-          <ChevronRight className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-90")} aria-hidden="true" />
-        </div>
-        {open && (
+          <span className="flex-1 text-left">{item.label}</span>
+          <ChevronRight className={cn("h-3.5 w-3.5 transition-transform", isOpen && "rotate-90")} aria-hidden="true" />
+        </button>
+        {isOpen && (
           <div className="ml-6 mt-0.5 space-y-0.5 border-l border-primary-600/40 pl-3">
             {item.children.map((child) => {
               const childActive = pathname === child.href;
@@ -142,8 +150,8 @@ function NavEntry({
                   className={cn(
                     "block rounded px-2 py-1.5 text-sm transition-colors",
                     childActive
-                      ? "text-white font-medium"
-                      : "text-primary-200 hover:text-white",
+                      ? "text-white font-medium bg-primary-600/80"
+                      : "text-primary-200 hover:text-white hover:bg-primary-600/30",
                   )}
                 >
                   {child.label}
